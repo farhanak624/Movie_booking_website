@@ -1,0 +1,47 @@
+<section>
+  <div class="container mt-5">
+    <form action="/admin-add-movie" method="POST" enctype="multipart/form-data">
+      <div class="">
+        <h1 class="container">Add Movie</h1>
+      </div>
+      <div class="form-group pt-3">
+        <label for="exampleInputEmail1">Movie name</label>
+        <input type="text" name="movie" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+          placeholder="Enter movie name">
+      </div>
+      <div class="form-group">
+        <label for="exampleInputEmail1">Category</label>
+
+        <select id="demo_overview_minimal" name="category" class="form-control" data-role="select-dropdown" data-profile="minimal">
+          <option class="default" value="">Select</option>
+          <option value="hollywood">Hollywood</option>
+          <option value="bollywood">Bollywood</option>
+          <option value="mollywood">Mollywood</option>
+          <option value="Kollywood">Kollywood</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="exampleInputEmail1">Genre</label>
+        <input type="text" name="genre" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+          placeholder="Enter movie genre">
+      </div>
+      <div class="form-group">
+        <label for="exampleInputEmail1">Duration</label>
+        <input type="text" name="duration" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+          placeholder="Time Duration">
+      </div>
+      <div class="form-group">
+        <label for="exampleInputEmail1">About</label>
+        <input type="text" name="about" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+          placeholder="Add overview">
+      </div>
+
+      <div class="form-group">
+        <label for="exampleInputPassword1">Poster</label>
+        <input type="file" name="image" class="form-control" id="exampleInputPassword1" placeholder="Upload image file">
+      </div>
+
+      <button type="submit" class="btn btn-info">Submit</button>
+    </form>
+  </div>
+</section>
