@@ -55,11 +55,23 @@ module.exports={
     },
     addToWishlist:(movieId,userId)=>{
         return new Promise(async(resolve,reject)=>{
+        
         let getWishlistmovie=await db.get().collection(collections.WISHLIST_COLLECTION).findOne({user:new ObjectId(userId)})
+        
+        console.log("exist",getWishlistmovie);
         if(getWishlistmovie){
-            db.get().collection(collections.WISHLIST_COLLECTION).updateOne({user: new ObjectId(userId)},{
-                $push:{movie:new ObjectId(movieId)}
+            db.get().collection(collections.WISHLIST_COLLECTION)
+            .updateOne(
+                {
+                    user: new ObjectId(userId),
+                    movies:{
+                        $ne:new ObjectId(movieId)
+                    }
+                },
+                {
+                    $addToSet:{movie:new ObjectId(movieId)}
             })
+            resolve({status:true})
         }else{
             let movieObj={
                 user:new ObjectId(userId),
@@ -71,7 +83,7 @@ module.exports={
             })
 
         }
-        
+    
         })
     },
     getWishlist:(userId)=>{
@@ -100,8 +112,33 @@ module.exports={
                 }
             ]).toArray()
             resolve(getMovie[0].movieWishList)
-            console.log('aggregate : ',getMovie)
-            
+            console.log('aggregate : ',getMovie[0].movieWishList)
+        
         })
+    },
+    getWishlistCount:(userId)=>{
+        return new Promise(async(resolve,reject)=>{
+            let wishCount=0
+            let wishlistcount= await db.get().collection(collections.WISHLIST_COLLECTION).findOne({user: new ObjectId(userId)})
+            if (wishlistcount){
+                wishCount=wishlistcount.movie.length
+                console.log("count is",wishCount)
+            }
+            resolve(wishCount)
+        })
+    },
+    removeWishList:(userId,movieId)=>{
+        return new Promise (async(resolve,reject)=>{
+            console.log("going to db");
+           await db.get().collection(collections.WISHLIST_COLLECTION)
+            .updateOne(
+                {user: new ObjectId(userId)},
+                {$pull:{movie:new ObjectId(movieId)}})
+
+        }).then((response)=>{
+            resolve({removeWishList:true})
+
+        })
+        
     }  
-}
+}  

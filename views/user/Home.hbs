@@ -1,3 +1,4 @@
+
 <section class="container-fluid pt-4">
   <div class="card w-3">
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
@@ -50,13 +51,16 @@
       <div class=" col-lg-3 col-md-6 col-12 pt-4">
         <div class="card" style="">
           <div class="bg-image hover-zoom">
-          <img src="/images/posters/{{this._id}}.jpg" style="height:400px;" class="card-img-top" alt="...">
+          <img src="/images/posters/{{this._id}}.jpg" style="max-height:300px;" class="card-img-top" alt="...">
           </div>
           <div class="card-body">
-            <h5 class="card-title">{{this.movie}}</h5>
+            <h6 class="card-title">{{this.movie}}</h6>
             <h6>{{this.genre}}</h6><h6>{{this.duration}}</h6>
             <p class="collapse mb-3 card-text">{{this.about}}</p>
-            <a href="" class="btn btn-outline-success">Book my show</a> <a href="/add-to-wishlist/{{this._id}}" class="btn btn-outline-info" style="margin-left: 2rem;"><i class="fa-solid fa-heart"></i></a>
+            {{!-- <a href="" class="btn btn-outline-success">Book my show</a> <a href="/add-to-wishlist/{{this._id}}" class="btn btn-outline-info" style="margin-left: 2rem;"><i class="fa-solid fa-heart"></i></a> --}}
+            <a href="" class="btn btn-outline-success">Book my show</a> 
+            <button  class="btn " onclick="addToWishlist('{{this._id}}')"  style="margin-left: 1rem;"><i class="fa-solid fa-heart"></i></button>
+            
           </div>
         </div>
       </div>
@@ -64,3 +68,7 @@
     </div>
   </div>
 </section>
+
+<script>
+  
+</script>

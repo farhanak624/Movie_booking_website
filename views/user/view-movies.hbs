@@ -31,11 +31,11 @@
     </div>
     <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
+        <span class="sr-only"></span>
     </a>
     <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
+        <span class="sr-only"></span>
     </a>
 </div>
   </div>
@@ -44,11 +44,11 @@
   <div class="container pt-5">
     <div class="row">
       <div class="container mb-3">
-        <h1 class="justify-content-center">New Releases</h1>
+        <h1 class="row justify-content-center">New Releases</h1>
       </div>
       {{#each allMovies}}
       <div class=" col-lg-3 col-md-6 col-12 pt-4">
-        <div class="card" style="">
+        <div class="card" style="height:100px">
           <div class="bg-image hover-zoom">
           <img src="/images/posters/{{this._id}}.jpg" style="height:400px;" class="card-img-top" alt="...">
           </div>

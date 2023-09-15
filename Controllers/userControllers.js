@@ -14,12 +14,16 @@ module.exports={
             res.redirect('/login')
         }
     },
-    getHome:(req,res)=>{
-        console.log('hi')
-        let user=req.session.user;
+    getHome:async(req,res)=>{
+        
+        let movieWishListcount =null
+        if(user=req.session.user){
+        movieWishListcount = await movieHelpers.getWishlistCount(req.session.user._id)
+        } 
+        // console.log("count home", movieWishListcount)
         // console.log("user is: ",user)
         movieHelpers.viewMovie().then((allMovies)=>{
-        res.render('user/Home',{admin:false,allMovies,user})
+        res.render('user/Home',{admin:false,allMovies,user,movieWishListcount})
     })
     },
     getUserSignin:(req,res)=>{
@@ -57,16 +61,35 @@ module.exports={
         req.session.user=null;
         res.redirect('/');
     },
-    addToWishlist:(req,res)=>{
+    addToWishlist:async(req,res)=>{
+        console.log("api call");
         movieId=req.params.id
         userId=req.session.user._id
-        movieHelpers.addToWishlist(movieId,userId)
-        res.redirect('/');
+        await movieHelpers.addToWishlist(movieId,userId).then(()=>{
+        res.json({status:true})
+        // res.send(req.flash('Added wishlist'));
+
+        })
     },
-    getwishlist:(req,res)=>{
+    getwishlist:async(req,res)=>{
         userId = req.session.user._id
-        console.log("movie and user Id: ",userId)
-        let wishlistedMovies= movieHelpers.getWishlist(userId)
-        res.render('user/wishlist',{admin:false, wishlistedMovies})
+        user=req.session.user
+        let wishlistedMovies=await  movieHelpers.getWishlist(userId)
+        console.log("wishlisted movies:", wishlistedMovies)
+        res.render('user/wishlist',{admin:false, wishlistedMovies,user})
+    },
+    getUserDetails:(req,res)=>{
+        userId = req.session.user._id
+        userDetails=req.session.user
+        res.render('user/user-profile',{admin:false,userDetails})
+    },
+    removeFromWishlist:(req,res)=>{
+        userId = req.session.user._id
+        movieId=req.params.id
+        movieHelpers.removeWishList(userId,movieId).then((response)=>{
+        console.log("success",response);
+        alert('deleted')
+        res.json(response)
+        })
     }
 }

@@ -1,25 +1,44 @@
-<section>
-    <div class="container pt-5">
-    <div class="row">
-      <div class="container mb-3">
-        <h1 class="justify-content-center">My Wishlist</h1>
-      </div>
-      {{#each wishlistedMovies}}
-      <div class=" col-lg-3 col-md-6 col-12 pt-4">
-        <div class="card" style="">
-          <div class="bg-image hover-zoom">
-          <img src="/images/posters/{{this._id}}.jpg" style="height:400px;" class="card-img-top" alt="...">
-          </div>
-          <div class="card-body">
-            <h5 class="card-title">{{this.movieWishList.movie}}</h5>
-            <h6>{{this.movieWishList.genre}}</h6><h6>{{this.movieWishList.duration}}</h6>
-            <p class="collapse mb-3 card-text">{{this.movieWishList.about}}</p>
-            <a href="" class="btn btn-outline-success">Book my show</a>
-          </div>
-        </div>
-      </div>
-      {{/each}}
-    </div>
-  </div>
 
+<section>
+  <div class="container pt-3 pb-5 mb-2">
+    <!-- Alert-->
+    {{!-- <div class="alert alert-info alert-dismissible fade show text-center mb-30"><span class="alert-close" data-dismiss="alert"></span><i class="fe-icon-award"></i>&nbsp;&nbsp;With this purchase you will earn <strong>2,549</strong> Reward Points.</div> --}}
+    <!-- Cart Item-->
+    {{#each wishlistedMovies}}
+    <div class="cart-item d-md-flex justify-content-between"><span class="remove-item"><i class="fa fa-times"></i></span>
+        <div class="px-3 my-3">
+            <a class="cart-item-product" href="#">
+                <div class="cart-item-product-thumb"><img src="/images/posters/{{this._id}}.jpg" alt="Product"></div>
+                <div class="cart-item-product-info">
+                    <h2 class="cart-item-product-title">{{this.movie}}</h2><span><strong>Genre:</strong> {{this.genre}}</span><span><strong>Duration:</strong> {{this.duration}}</span>
+                    <h6></h6>
+                </div>
+            </a>
+        </div>
+    
+        <div class="px-5 my-5 text-center">
+            <span class="text-xl font-weight-medium"><a class="btn btn-outline-success" type="submit" href="">Book Now</a> <a class="btn btn-outline-danger" type="submit" onclick="removeWishedMovie('{{this._id}}')">Remove</a></span>
+        </div>
+    </div>
+    {{/each}}
+    <!-- Cart Item-->
+    
+    <!-- Coupon + Subtotal-->
+    <div class="d-sm-flex justify-content-between align-items-center text-center text-sm-left">
+        <form class="form-inline py-2">
+            <label class="sr-only">Coupon code</label>
+            <input class="form-control form-control-sm my-2 mr-3" type="text" placeholder="Coupon code" required="">
+            <button class="btn btn-style-1 btn-secondary btn-sm my-2 mx-auto mx-sm-0" type="submit">Apply Coupon</button>
+        </form>
+        <div class="py-2"><span class="d-inline-block align-middle text-sm text-muted font-weight-medium text-uppercase mr-2">Subtotal:</span><span class="d-inline-block align-middle text-xl font-weight-medium">$188.50</span></div>
+    </div>
+    <!-- Buttons-->
+    <hr class="my-2">
+    <div class="row pt-3 pb-5 mb-2">
+        <div class="col-sm-6 mb-3"><a class="btn btn-style-1 btn-secondary btn-block" href="#"><i class="fe-icon-refresh-ccw"></i>&nbsp;Update Cart</a></div>
+        <div class="col-sm-6 mb-3"><a class="btn btn-style-1 btn-primary btn-block" href="checkout-address.html"><i class="fe-icon-credit-card"></i>&nbsp;Checkout</a></div>
+    </div>
+
+       
+    </div>
 </section>
